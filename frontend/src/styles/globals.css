@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cyan: #00F0FF;
+  --color-magenta: #FF00FF;
+  --color-gold: #FFD700;
+  --color-dark-blue: #0A0E27;
+  --color-surface: #1A1F3A;
+  --color-success: #00FF88;
+  --color-danger: #FF3366;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-blue text-white font-inter;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(255, 0, 255, 0.03) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: rgba(0, 240, 255, 0.3);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(26, 31, 58, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 240, 255, 0.1);
+  }
+
+  .glass-strong {
+    background: rgba(26, 31, 58, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+  }
+
+  .glass-card {
+    background: rgba(26, 31, 58, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 240, 255, 0.08);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(0, 240, 255, 0.25);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+  }
+
+  .neon-text-cyan {
+    color: #00F0FF;
+    text-shadow: 0 0 7px #00F0FF, 0 0 20px rgba(0, 240, 255, 0.5);
+  }
+
+  .neon-text-magenta {
+    color: #FF00FF;
+    text-shadow: 0 0 7px #FF00FF, 0 0 20px rgba(255, 0, 255, 0.5);
+  }
+
+  .neon-text-gold {
+    color: #FFD700;
+    text-shadow: 0 0 7px #FFD700, 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+
+  .neon-border-cyan {
+    border: 1px solid #00F0FF;
+    box-shadow: 0 0 5px rgba(0, 240, 255, 0.3), inset 0 0 5px rgba(0, 240, 255, 0.1);
+  }
+
+  .neon-border-magenta {
+    border: 1px solid #FF00FF;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.3), inset 0 0 5px rgba(255, 0, 255, 0.1);
+  }
+
+  .neon-border-gold {
+    border: 1px solid #FFD700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3), inset 0 0 5px rgba(255, 215, 0, 0.1);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #00F0FF 0%, #FF00FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg font-orbitron font-semibold text-sm tracking-wider uppercase;
+    background: linear-gradient(135deg, #00F0FF 0%, #00C4D4 100%);
+    color: #0A0E27;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg font-orbitron font-semibold text-sm tracking-wider uppercase;
+    background: linear-gradient(135deg, #FF00FF 0%, #D400D4 100%);
+    color: #0A0E27;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 rounded-lg font-orbitron font-semibold text-sm tracking-wider uppercase;
+    background: transparent;
+    border: 1px solid #00F0FF;
+    color: #00F0FF;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline:hover {
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  }
+
+  .grid-cell {
+    @apply border border-surface-light transition-colors duration-200;
+    background: rgba(26, 31, 58, 0.3);
+  }
+
+  .grid-cell-obstacle {
+    background: rgba(255, 51, 102, 0.3);
+    border-color: rgba(255, 51, 102, 0.5);
+  }
+
+  .grid-cell-start {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: rgba(0, 255, 136, 0.5);
+  }
+
+  .grid-cell-end {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+  }
+
+  .difficulty-easy {
+    @apply text-success bg-success/10 border-success/30;
+  }
+
+  .difficulty-medium {
+    @apply text-cyan bg-cyan/10 border-cyan/30;
+  }
+
+  .difficulty-hard {
+    @apply text-gold bg-gold/10 border-gold/30;
+  }
+
+  .difficulty-expert {
+    @apply text-magenta bg-magenta/10 border-magenta/30;
+  }
+
+  .difficulty-elite {
+    @apply text-danger bg-danger/10 border-danger/30;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0E27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1F3A;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #252A4A;
+  border-color: rgba(0, 240, 255, 0.3);
+}
+
+/* Animations */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    border-color: rgba(0, 240, 255, 0.8);
+  }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+/* Grid background pattern */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* RainbowKit overrides */
+[data-rk] {
+  --rk-colors-accentColor: #00F0FF !important;
+  --rk-colors-connectButtonBackground: rgba(26, 31, 58, 0.8) !important;
+  --rk-colors-connectButtonText: #00F0FF !important;
+  --rk-radii-connectButton: 12px !important;
+}

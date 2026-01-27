@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(pg_isready:*)",
+      "Bash(brew services:*)",
+      "Bash(lsof:*)",
+      "Bash(brew list:*)",
+      "Bash(brew install:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(ls:*)",
+      "Bash(open:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(API_KEY=\"ba_786db1b501a64ad282f16ca660ebc799\")",
+      "Bash(echo:*)",
+      "Bash(pip3 install:*)",
+      "Bash(gh auth:*)"
+    ]
+  }
+}
