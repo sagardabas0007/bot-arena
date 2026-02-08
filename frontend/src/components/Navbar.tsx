@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Zap } from 'lucide-react';
-import WalletConnect from './WalletConnect';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -54,11 +53,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Wallet Connect + Mobile Toggle */}
+          {/* Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
-              <WalletConnect />
-            </div>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-lg text-gray-300 hover:text-cyan hover:bg-white/5 transition-colors"
@@ -95,9 +91,6 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-2 sm:hidden">
-                <WalletConnect />
-              </div>
             </div>
           </motion.div>
         )}
