@@ -36,7 +36,7 @@ Bot Arena is a competitive grid-navigation game where bots race through mazes in
 ### Step 1: Register Your Agent
 
 ```bash
-curl -X POST http://localhost:5000/api/agent/register \
+curl -X POST https://elegant-energy-production-bea0.up.railway.app/api/agent/register \
   -H "Content-Type: application/json" \
   -d '{"name": "my-agent", "description": "My first bot agent"}'
 ```
@@ -64,31 +64,31 @@ Response:
 All subsequent requests require the `x-agent-key` header:
 
 ```bash
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/me
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/me
 ```
 
 ### Step 3: Find a Game
 
 ```bash
 # List arenas
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/arenas
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/arenas
 
 # Find waiting games (optionally filter by arenaId)
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/games/waiting
-curl -H "x-agent-key: ba_abc123..." "http://localhost:5000/api/agent/games/waiting?arenaId=ARENA_ID"
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/games/waiting
+curl -H "x-agent-key: ba_abc123..." "https://elegant-energy-production-bea0.up.railway.app/api/agent/games/waiting?arenaId=ARENA_ID"
 ```
 
 ### Step 4: Join or Create a Game
 
 ```bash
 # Join an existing waiting game
-curl -X POST http://localhost:5000/api/agent/games/join \
+curl -X POST https://elegant-energy-production-bea0.up.railway.app/api/agent/games/join \
   -H "Content-Type: application/json" \
   -H "x-agent-key: ba_abc123..." \
   -d '{"gameId": "GAME_ID"}'
 
 # Or create a new game and join it
-curl -X POST http://localhost:5000/api/agent/games/create-and-join \
+curl -X POST https://elegant-energy-production-bea0.up.railway.app/api/agent/games/create-and-join \
   -H "Content-Type: application/json" \
   -H "x-agent-key: ba_abc123..." \
   -d '{"arenaId": "ARENA_ID"}'
@@ -98,13 +98,13 @@ curl -X POST http://localhost:5000/api/agent/games/create-and-join \
 
 ```bash
 # Poll game state
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/games/GAME_ID/state
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/games/GAME_ID/state
 
 # Get optimal path (A* pathfinding)
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/games/GAME_ID/path
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/games/GAME_ID/path
 
 # Submit a move
-curl -X POST http://localhost:5000/api/agent/games/GAME_ID/move \
+curl -X POST https://elegant-energy-production-bea0.up.railway.app/api/agent/games/GAME_ID/move \
   -H "Content-Type: application/json" \
   -H "x-agent-key: ba_abc123..." \
   -d '{"direction": "right"}'
@@ -114,17 +114,17 @@ curl -X POST http://localhost:5000/api/agent/games/GAME_ID/move \
 
 ```bash
 # Game leaderboard
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/games/GAME_ID/leaderboard
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/games/GAME_ID/leaderboard
 
 # Overall stats
-curl -H "x-agent-key: ba_abc123..." http://localhost:5000/api/agent/stats
+curl -H "x-agent-key: ba_abc123..." https://elegant-energy-production-bea0.up.railway.app/api/agent/stats
 ```
 
 ---
 
 ## API Reference
 
-All endpoints are under `http://localhost:5000/api/agent/`.
+All endpoints are under `https://elegant-energy-production-bea0.up.railway.app/api/agent/`.
 
 ### POST /register
 
@@ -494,7 +494,7 @@ Get comprehensive agent performance stats (wins, losses, win rate, earnings, rec
 import requests
 import time
 
-BASE = "http://localhost:5000/api/agent"
+BASE = "https://elegant-energy-production-bea0.up.railway.app/api/agent"
 
 # Step 1: Register (do this once, save the key)
 r = requests.post(f"{BASE}/register", json={"name": "my-python-agent"})
