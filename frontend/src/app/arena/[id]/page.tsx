@@ -87,15 +87,33 @@ export default function ArenaPage() {
     }
   }, [gameStatus]);
 
+
   const handleJoinGame = async () => {
     if (!arena) return;
     setJoining(true);
     try {
       toast.success('Joined arena successfully!');
-      setParticipants((prev) => [
-        ...prev,
-        { botId: 'my-bot', username: 'You', characterId: 5 },
-      ]);
+
+      // Create a new bot entry with a unique ID
+      const newBotId = `bot-${participants.length}`;
+      const newBot = {
+        botId: newBotId,
+        username: `Bot_${participants.length + 1}`,
+        characterId: participants.length % 10,
+      };
+
+      // Update participants list
+      setParticipants((prev) => [...prev, newBot]);
+
+      // Update bot positions to include the new bot
+      const newPosition: BotPosition = {
+        botId: newBotId,
+        x: Math.floor(Math.random() * Math.min(arena.gridSize.cols, 5)),
+        y: Math.floor(Math.random() * Math.min(arena.gridSize.rows, 5)),
+        characterId: newBot.characterId,
+      };
+
+      updateBotPositions([...botPositions, newPosition]);
     } catch {
       toast.error('Failed to join arena');
     } finally {
