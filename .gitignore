@@ -49,3 +49,10 @@ backend/prisma/migrations/
 # IDE
 .vscode/
 .idea/
+
+# Temp/scripts
+.commit_log
+backdate_commits.sh
+demo_agent.sh
+demo_arena.py
+.claude/
