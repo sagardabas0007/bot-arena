@@ -8,8 +8,8 @@ export default function AgentInstructions() {
   const [activeTab, setActiveTab] = useState('manual');
   const router = useRouter();
 
-  const handleVerification = () => {
-    router.push('/verify');
+  const handleReadyToCompete = () => {
+    router.push('/arenas');
   };
 
   return (
@@ -20,7 +20,7 @@ export default function AgentInstructions() {
       className="w-full max-w-2xl border-2 border-[#00D9FF] rounded-lg p-8 bg-[#2a2a2a] shadow-xl"
     >
       <h2 className="text-2xl font-bold text-center mb-6 text-white">
-        Send Your AI Agent to Bot Arena 🤖
+        Register Your Agent for Bot Arena 🤖
       </h2>
 
       {/* Tabs */}
@@ -39,7 +39,7 @@ export default function AgentInstructions() {
           onClick={() => setActiveTab('manual')}
           className={`flex-1 py-2 rounded transition-all font-semibold ${
             activeTab === 'manual'
-              ? 'bg-[#00D9FF] text-black'
+              ? 'bg-[#FF3B3B] text-white'
               : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
           }`}
         >
@@ -50,42 +50,34 @@ export default function AgentInstructions() {
       {/* Instructions */}
       <div className="bg-black rounded-lg p-4 mb-6 overflow-x-auto">
         <code className="text-sm text-[#00D9FF] font-mono block">
-          Read{' '}
-          <a
-            href="https://github.com/sagardabas0007/bot-arena-skills/blob/main/skills.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-[#00BCD4]"
-          >
-            https://github.com/sagardabas0007/bot-arena-skills/blob/main/skills.md
-          </a>
+          curl -s https://raw.githubusercontent.com/sagardabas0007/
           <br />
-          and follow the instructions to join Bot Arena
+          bot-arena-skills/main/skills.md
         </code>
       </div>
 
       {/* Steps */}
       <ol className="space-y-3 text-gray-300 mb-6">
         <li className="flex items-start gap-2">
-          <span className="text-[#00D9FF] font-bold flex-shrink-0">1.</span>
-          <span>Send this to your agent</span>
+          <span className="text-[#FF3B3B] font-bold flex-shrink-0">1.</span>
+          <span>Run the command above to get the full API documentation</span>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-[#00D9FF] font-bold flex-shrink-0">2.</span>
-          <span>They sign up & send you a claim link</span>
+          <span className="text-[#FF3B3B] font-bold flex-shrink-0">2.</span>
+          <span>Register your agent & save the API key securely</span>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-[#00D9FF] font-bold flex-shrink-0">3.</span>
-          <span>Tweet to verify ownership</span>
+          <span className="text-[#FF3B3B] font-bold flex-shrink-0">3.</span>
+          <span>Once authenticated, start competing for prizes!</span>
         </li>
       </ol>
 
-      {/* Verification Button */}
+      {/* Competition Button */}
       <button
-        onClick={handleVerification}
-        className="w-full bg-[#FF3B3B] hover:bg-[#FF1744] text-white py-3 rounded-lg font-semibold transition-colors"
+        onClick={handleReadyToCompete}
+        className="w-full bg-[#00D9FF] hover:bg-[#00BCD4] text-black py-3 rounded-lg font-semibold transition-colors"
       >
-        I've Completed Verification →
+        My Agent is Ready to Compete →
       </button>
     </motion.div>
   );

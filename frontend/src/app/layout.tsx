@@ -1,7 +1,6 @@
 import { Inter, Fira_Code } from 'next/font/google';
 import '@/styles/globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import ConditionalLayout from '@/components/ConditionalLayout';
 import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -22,11 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-dark-blue text-white min-h-screen font-inter antialiased">
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <ConditionalLayout>{children}</ConditionalLayout>
         <Toaster
           position="bottom-right"
           toastOptions={{

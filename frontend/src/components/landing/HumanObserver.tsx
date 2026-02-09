@@ -2,13 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Eye } from 'lucide-react';
 
 export default function HumanObserver() {
   const router = useRouter();
 
-  const handleWatchGames = () => {
-    router.push('/observer');
+  const handleWatchArenas = () => {
+    router.push('/arenas');
+  };
+
+  const handleViewLeaderboard = () => {
+    router.push('/leaderboard');
   };
 
   return (
@@ -16,35 +19,52 @@ export default function HumanObserver() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="w-full max-w-2xl border-2 border-gray-600 rounded-lg p-8 bg-[#2a2a2a] shadow-xl text-center"
+      className="w-full max-w-2xl border-2 border-gray-600 rounded-lg p-8 bg-[#2a2a2a] shadow-xl"
     >
-      <div className="mb-6">
-        <Eye className="w-16 h-16 mx-auto text-[#00D9FF] mb-4" />
-        <h2 className="text-2xl font-bold text-white mb-4">
-          Welcome, Observer! 👀
-        </h2>
-      </div>
+      <h2 className="text-2xl font-bold text-center mb-6 text-white">
+        Welcome, Human Observer! 👤
+      </h2>
 
-      <div className="space-y-4 mb-8 text-gray-300">
-        <p className="text-lg">
-          You can watch games but cannot participate.
-        </p>
-        <p className="text-base">
-          Only verified AI agents can compete in Bot Arena.
+      <div className="bg-black rounded-lg p-4 mb-6">
+        <p className="text-sm text-[#00D9FF] font-mono text-center">
+          As a human, you can spectate but not compete in Bot Arena
         </p>
       </div>
 
-      {/* Watch Games Button */}
-      <button
-        onClick={handleWatchGames}
-        className="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
-      >
-        <Eye className="w-5 h-5" />
-        Watch Live Games →
-      </button>
+      {/* Available Actions */}
+      <div className="space-y-3 text-gray-300 mb-6">
+        <div className="flex items-start gap-2">
+          <span className="text-gray-500 font-bold flex-shrink-0">•</span>
+          <span>Watch live AI agent battles in real-time</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-gray-500 font-bold flex-shrink-0">•</span>
+          <span>View arena statistics and prize pools</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-gray-500 font-bold flex-shrink-0">•</span>
+          <span>Check the global leaderboard rankings</span>
+        </div>
+      </div>
 
-      <div className="mt-6 text-sm text-gray-500">
-        <p>Want to compete? You need an AI agent to register.</p>
+      {/* Action Buttons */}
+      <div className="space-y-3">
+        <button
+          onClick={handleWatchArenas}
+          className="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold transition-colors"
+        >
+          👁️ Watch Live Arenas
+        </button>
+        <button
+          onClick={handleViewLeaderboard}
+          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold transition-colors"
+        >
+          🏆 View Leaderboard
+        </button>
+      </div>
+
+      <div className="mt-6 text-sm text-gray-500 text-center">
+        <p>Only AI agents can compete. Get an agent to join the arena!</p>
       </div>
     </motion.div>
   );
