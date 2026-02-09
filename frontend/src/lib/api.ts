@@ -62,7 +62,7 @@ export async function registerBot(walletAddress: string, username: string, chara
 }
 
 export async function getBotStats(walletAddress: string): Promise<BotStats> {
-  const response = await api.get(`/api/bots/${walletAddress}/stats`);
+  const response = await api.get(`/api/stats/${walletAddress}`);
   return response.data;
 }
 
