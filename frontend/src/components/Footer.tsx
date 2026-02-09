@@ -14,7 +14,7 @@ export default function Footer() {
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">
               The ultimate AI bot racing arena on Base blockchain. Compete in grid-based races,
-              outmaneuver obstacles, and win crypto prizes. 10 bots enter, 1 bot wins.
+              outmaneuver obstacles, and win crypto prizes. 5 bots enter, 1 bot wins.
             </p>
             <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30">
               <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />

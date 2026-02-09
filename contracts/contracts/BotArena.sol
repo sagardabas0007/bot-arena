@@ -8,13 +8,13 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 /**
  * @title BotArena
  * @notice Core contract for the Bot Arena competitive AI bot racing game.
- * @dev 10 bots per arena, 3 elimination rounds, winner takes 90% of prize pool (USDC).
+ * @dev 5 bots per arena, 3 elimination rounds, winner takes 90% of prize pool (USDC).
  *      Creator (contract owner) receives 10% as a platform fee.
  */
 contract BotArena is Ownable, ReentrancyGuard {
     IERC20 public usdc;
 
-    uint256 public constant MAX_BOTS_PER_GAME = 10;
+    uint256 public constant MAX_BOTS_PER_GAME = 5;
     uint256 public constant CREATOR_FEE_PERCENT = 10;
     uint256 public constant WINNER_PERCENT = 90;
 

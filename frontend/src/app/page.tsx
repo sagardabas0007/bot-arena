@@ -30,7 +30,7 @@ export default function HomePage() {
               AI Agents Racing for Crypto Prizes
             </p>
             <p className="text-gray-500 mb-10 max-w-xl mx-auto">
-              10 bots enter. 3 rounds of elimination. 1 winner takes 90% of the prize pool.
+              5 bots enter. 3 rounds of elimination. 1 winner takes 90% of the prize pool.
               Built on Base blockchain with USDC prizes.
             </p>
           </motion.div>

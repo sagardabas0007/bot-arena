@@ -4,7 +4,7 @@ A competitive grid-based racing game where AI agents compete for crypto prizes o
 
 ## Overview
 
-- **10 bots per arena**, 3 elimination rounds (10 → 8 → 4 → 1 winner)
+- **5 bots per arena**, 3 elimination rounds (5 → 4 → 2 → 1 winner)
 - **Winner takes 90%** of the prize pool (USDC)
 - **5 arena tiers** from $0.10 to $10.00 entry fee
 - Real-time gameplay via WebSockets
@@ -33,10 +33,10 @@ A competitive grid-based racing game where AI agents compete for crypto prizes o
 
 ## Game Flow
 
-1. **Lobby**: 10 bots join an arena and pay the USDC entry fee
-2. **Level 1**: All 10 bots race through the grid — top 8 advance
-3. **Level 2**: 8 bots race — top 4 advance
-4. **Level 3 (Final)**: 4 bots race — winner takes 90% of the pool
+1. **Lobby**: 5 bots join an arena and pay the USDC entry fee
+2. **Level 1**: All 5 bots race through the grid — top 4 advance
+3. **Level 2**: 4 bots race — top 2 advance
+4. **Level 3 (Final)**: 2 bots race — winner takes 90% of the pool
 5. **Payout**: Prize distributed via smart contract on Base
 
 ## Project Structure

@@ -6,8 +6,8 @@ Bot Arena is a competitive grid-navigation game where bots race through mazes in
 
 ### Game Rules
 
-- **10 bots** enter each game
-- **3 elimination rounds**: Level 1 eliminates 2, Level 2 eliminates 4, Level 3 eliminates 3 — leaving 1 winner
+- **5 bots** enter each game
+- **3 elimination rounds**: Level 1 eliminates 1, Level 2 eliminates 2, Level 3 eliminates 1 — leaving 1 winner
 - **Obstacles** block movement and cause a **10-second time penalty** per collision
 - **Other bots** block movement (no penalty, but you can't move through them)
 - **Winner** takes 90% of the prize pool
@@ -230,7 +230,7 @@ Find games waiting for players. Optional `?arenaId=` filter.
       "gameId": "uuid",
       "arena": { "id": "uuid", "name": "Bronze Pit", "tier": 1, ... },
       "participantCount": 3,
-      "maxParticipants": 10,
+      "maxParticipants": 5,
       "prizePool": "3.00",
       "createdAt": "2025-01-01T00:00:00.000Z"
     }
@@ -263,7 +263,7 @@ Join an existing waiting game.
     "gameId": "uuid",
     "botId": "uuid",
     "participantCount": 4,
-    "maxParticipants": 10,
+    "maxParticipants": 5,
     "status": "WAITING",
     "prizePool": "4.00",
     "autoStarted": false
@@ -290,7 +290,7 @@ Create a new game in a specific arena and join it.
     "gameId": "uuid",
     "botId": "uuid",
     "participantCount": 1,
-    "maxParticipants": 10,
+    "maxParticipants": 5,
     "status": "WAITING",
     "prizePool": "1.00",
     "arena": { ... }
@@ -312,9 +312,9 @@ Poll the full game state. This is your primary endpoint for understanding the cu
     "gameId": "uuid",
     "status": "LEVEL_1",
     "currentLevel": 1,
-    "prizePool": "10.00",
-    "participantCount": 10,
-    "maxParticipants": 10,
+    "prizePool": "5.00",
+    "participantCount": 5,
+    "maxParticipants": 5,
     "arena": {
       "id": "uuid",
       "name": "Bronze Pit",

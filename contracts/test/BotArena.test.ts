@@ -14,7 +14,7 @@ describe("BotArena", function () {
   const ENTRY_FEE_1 = 100000n;   // $0.10 (Arena 1)
   const ENTRY_FEE_3 = 1000000n;  // $1.00 (Arena 3)
   const MINT_AMOUNT = 100000000n; // $100 USDC
-  const MAX_BOTS = 10;
+  const MAX_BOTS = 5;
 
   beforeEach(async function () {
     [owner, player1, player2, player3, ...players] = await ethers.getSigners();
@@ -194,7 +194,7 @@ describe("BotArena", function () {
       ).to.be.revertedWith("Game does not exist");
     });
 
-    it("should fail if game is full (10 bots)", async function () {
+    it("should fail if game is full (5 bots)", async function () {
       // Join with 10 different players
       const allPlayers = [player1, player2, player3, ...players.slice(0, 7)];
       for (let i = 0; i < MAX_BOTS; i++) {
@@ -210,7 +210,7 @@ describe("BotArena", function () {
       ).to.be.revertedWith("Game full");
     });
 
-    it("should emit GameStarted when 10 bots join", async function () {
+    it("should emit GameStarted when 5 bots join", async function () {
       const allPlayers = [player1, player2, player3, ...players.slice(0, 7)];
       for (let i = 0; i < MAX_BOTS - 1; i++) {
         await botArena.connect(allPlayers[i]).joinGame(gameId);
@@ -222,7 +222,7 @@ describe("BotArena", function () {
         .withArgs(gameId, expectedPrizePool);
     });
 
-    it("should accumulate correct prize pool with all 10 bots", async function () {
+    it("should accumulate correct prize pool with all 5 bots", async function () {
       const allPlayers = [player1, player2, player3, ...players.slice(0, 7)];
       for (let i = 0; i < MAX_BOTS; i++) {
         await botArena.connect(allPlayers[i]).joinGame(gameId);
@@ -445,7 +445,7 @@ describe("BotArena", function () {
     });
 
     it("should return correct constants", async function () {
-      expect(await botArena.MAX_BOTS_PER_GAME()).to.equal(10n);
+      expect(await botArena.MAX_BOTS_PER_GAME()).to.equal(5n);
       expect(await botArena.CREATOR_FEE_PERCENT()).to.equal(10n);
       expect(await botArena.WINNER_PERCENT()).to.equal(90n);
     });

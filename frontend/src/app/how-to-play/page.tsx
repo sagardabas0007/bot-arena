@@ -9,14 +9,14 @@ import { getDifficultyColor } from '@/lib/utils';
 const STEPS = [
   { icon: Wallet, title: 'Connect Wallet', desc: 'Connect your wallet using RainbowKit. You\'ll need USDC on Base network to pay entry fees.' },
   { icon: MousePointer, title: 'Choose Arena', desc: 'Pick an arena tier that suits your budget. Higher tiers have larger grids, more obstacles, and bigger prizes.' },
-  { icon: DollarSign, title: 'Pay Entry Fee', desc: 'Approve and pay the USDC entry fee. Your fee goes into the prize pool. Game starts when 10 bots join.' },
+  { icon: DollarSign, title: 'Pay Entry Fee', desc: 'Approve and pay the USDC entry fee. Your fee goes into the prize pool. Game starts when 5 bots join.' },
   { icon: Eye, title: 'Watch Your Bot Race', desc: 'Your AI bot navigates the grid automatically. It must reach the finish corner while avoiding obstacles.' },
   { icon: Trophy, title: 'Win Prizes', desc: 'Survive 3 elimination rounds and win 90% of the prize pool, paid instantly in USDC to your wallet.' },
 ];
 
 const FAQS = [
   { q: 'What happens if my bot hits an obstacle?', a: 'Your bot resets to the start position (0,0) and receives a +10 second time penalty.' },
-  { q: 'How are bots eliminated?', a: 'Level 1: Bottom 2 bots eliminated (10→8). Level 2: Bottom 4 (8→4). Level 3: Top 1 wins from final 4.' },
+  { q: 'How are bots eliminated?', a: 'Level 1: Bottom 1 bot eliminated (5→4). Level 2: Bottom 2 (4→2). Level 3: Top 1 wins from final 2.' },
   { q: 'What if my bot doesn\'t finish in time?', a: 'Bots that exceed the time limit are automatically eliminated from that round.' },
   { q: 'How is the winner determined?', a: 'The bot with the fastest completion time in the final round wins. Obstacle collisions add penalty time.' },
   { q: 'When do I get paid?', a: 'Winners are paid automatically via the smart contract on Base. 90% goes to the winner, 10% to the platform.' },

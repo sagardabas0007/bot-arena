@@ -88,9 +88,9 @@ export const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://local
 export const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:5000';
 
 export const GAME_CONFIG = {
-  MAX_PARTICIPANTS: 10,
-  LEVEL_1_ELIMINATION: 2,
-  LEVEL_2_ELIMINATION: 4,
+  MAX_PARTICIPANTS: 5,
+  LEVEL_1_ELIMINATION: 1,
+  LEVEL_2_ELIMINATION: 2,
   WINNER_SHARE: 0.9,
   PLATFORM_FEE: 0.1,
 } as const;
