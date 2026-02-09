@@ -52,8 +52,16 @@ export default function ArenaPage() {
   const arena = ARENAS.find((a) => a.id === arenaId);
 
   const { isVerified } = useAuthStore();
-  const { currentGame, botPositions, updateBotPositions } = useGameStore();
+  const { currentGame, botPositions, updateBotPositions, reset } = useGameStore();
   const { isConnected, emit } = useWebSocket();
+
+  // All hooks must be at the top before any conditional returns
+  const [gameStatus, setGameStatus] = useState<GameStatus>('WAITING');
+  const [participants, setParticipants] = useState<{ botId: string; username: string; characterId: number }[]>([]);
+  const [timer, setTimer] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState(1);
+  const [gameGrid, setGameGrid] = useState<GameGridType | null>(null);
+  const [joining, setJoining] = useState(false);
 
   // Auth protection
   useEffect(() => {
@@ -61,6 +69,37 @@ export default function ArenaPage() {
       router.push('/');
     }
   }, [isVerified, router]);
+
+  // IMMEDIATE reset on component mount - runs ONCE
+  useEffect(() => {
+    console.log('🔄 Resetting arena state...');
+    console.log('Before reset - botPositions:', botPositions.length, 'participants:', participants.length);
+    reset();
+    setParticipants([]);
+    setGameStatus('WAITING');
+    setTimer(0);
+    setCurrentLevel(1);
+    console.log('After reset - participants set to empty');
+    console.log('✅ Arena reset complete');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty array = runs only once on mount
+
+  // Initialize grid when arena changes
+  useEffect(() => {
+    if (arena) {
+      console.log('🎮 Initializing grid for arena:', arena.name);
+      console.log('Current participants:', participants.length, 'Bot positions:', botPositions.length);
+      setGameGrid(generateDemoGrid(arena.gridSize.rows, arena.gridSize.cols, arena.obstacleCount));
+    }
+  }, [arena, participants.length, botPositions.length]);
+
+  // Timer effect
+  useEffect(() => {
+    if (gameStatus === 'LEVEL_1' || gameStatus === 'LEVEL_2' || gameStatus === 'LEVEL_3') {
+      const interval = setInterval(() => setTimer((t) => t + 1), 1000);
+      return () => clearInterval(interval);
+    }
+  }, [gameStatus]);
 
   if (!isVerified) {
     return (
@@ -72,41 +111,6 @@ export default function ArenaPage() {
       </div>
     );
   }
-
-  const [gameStatus, setGameStatus] = useState<GameStatus>('WAITING');
-  const [participants, setParticipants] = useState<{ botId: string; username: string; characterId: number }[]>([]);
-  const [timer, setTimer] = useState(0);
-  const [currentLevel, setCurrentLevel] = useState(1);
-  const [gameGrid, setGameGrid] = useState<GameGridType | null>(null);
-  const [joining, setJoining] = useState(false);
-
-  useEffect(() => {
-    if (arena) {
-      setGameGrid(generateDemoGrid(arena.gridSize.rows, arena.gridSize.cols, arena.obstacleCount));
-      // Demo participants
-      const demoBots = Array.from({ length: 4 }, (_, i) => ({
-        botId: `bot-${i}`,
-        username: `Bot_${i + 1}`,
-        characterId: i,
-      }));
-      setParticipants(demoBots);
-
-      const demoPositions: BotPosition[] = demoBots.map((b, i) => ({
-        botId: b.botId,
-        x: Math.floor(Math.random() * Math.min(arena.gridSize.cols, 5)),
-        y: Math.floor(Math.random() * Math.min(arena.gridSize.rows, 5)),
-        characterId: b.characterId,
-      }));
-      updateBotPositions(demoPositions);
-    }
-  }, [arena, updateBotPositions]);
-
-  useEffect(() => {
-    if (gameStatus === 'LEVEL_1' || gameStatus === 'LEVEL_2' || gameStatus === 'LEVEL_3') {
-      const interval = setInterval(() => setTimer((t) => t + 1), 1000);
-      return () => clearInterval(interval);
-    }
-  }, [gameStatus]);
 
 
   const handleJoinGame = async () => {
@@ -124,17 +128,18 @@ export default function ArenaPage() {
       };
 
       // Update participants list
-      setParticipants((prev) => [...prev, newBot]);
+      const updatedParticipants = [...participants, newBot];
+      setParticipants(updatedParticipants);
 
-      // Update bot positions to include the new bot
-      const newPosition: BotPosition = {
-        botId: newBotId,
+      // Rebuild ALL bot positions from the updated participants list
+      const allPositions: BotPosition[] = updatedParticipants.map((p, i) => ({
+        botId: p.botId,
         x: Math.floor(Math.random() * Math.min(arena.gridSize.cols, 5)),
         y: Math.floor(Math.random() * Math.min(arena.gridSize.rows, 5)),
-        characterId: newBot.characterId,
-      };
+        characterId: p.characterId,
+      }));
 
-      updateBotPositions([...botPositions, newPosition]);
+      updateBotPositions(allPositions);
     } catch {
       toast.error('Failed to join arena');
     } finally {

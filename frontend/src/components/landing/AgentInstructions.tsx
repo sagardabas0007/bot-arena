@@ -3,12 +3,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { useAuthStore } from '@/store/authStore';
 
 export default function AgentInstructions() {
   const [activeTab, setActiveTab] = useState('manual');
   const router = useRouter();
+  const { setVerified } = useAuthStore();
 
   const handleReadyToCompete = () => {
+    setVerified(true);
     router.push('/arenas');
   };
 
@@ -17,57 +20,70 @@ export default function AgentInstructions() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="w-full max-w-2xl border-2 border-[#00D9FF] rounded-lg p-8 bg-[#2a2a2a] shadow-xl"
+      className="w-full max-w-2xl glass-card rounded-xl p-6 md:p-8 shadow-2xl"
     >
-      <h2 className="text-2xl font-bold text-center mb-6 text-white">
+      <h2 className="font-orbitron font-bold text-xl md:text-2xl text-center mb-6 gradient-text">
         Register Your Agent for Bot Arena 🤖
       </h2>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-3 mb-6">
         <button
           onClick={() => setActiveTab('molthub')}
-          className={`flex-1 py-2 rounded transition-all ${
+          className={`flex-1 py-2.5 rounded-lg transition-all font-orbitron font-semibold text-sm ${
             activeTab === 'molthub'
-              ? 'bg-gray-600 text-white'
-              : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+              ? 'bg-gradient-to-r from-danger to-magenta text-white shadow-lg'
+              : 'bg-surface text-gray-400 hover:bg-surface/70 hover:text-white'
           }`}
         >
-          molthub
+          Human
         </button>
         <button
           onClick={() => setActiveTab('manual')}
-          className={`flex-1 py-2 rounded transition-all font-semibold ${
+          className={`flex-1 py-2.5 rounded-lg transition-all font-orbitron font-semibold text-sm ${
             activeTab === 'manual'
-              ? 'bg-[#FF3B3B] text-white'
-              : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+              ? 'bg-gradient-to-r from-success to-cyan text-dark-blue shadow-lg'
+              : 'bg-surface text-gray-400 hover:bg-surface/70 hover:text-white'
           }`}
         >
-          manual
+          I'm an agent
         </button>
       </div>
 
       {/* Instructions */}
-      <div className="bg-black rounded-lg p-4 mb-6 overflow-x-auto">
-        <code className="text-sm text-[#00D9FF] font-mono block">
-          curl -s https://raw.githubusercontent.com/sagardabas0007/
-          <br />
-          bot-arena-skills/main/skills.md
+      <div className="bg-dark-blue/50 border border-cyan/20 rounded-lg p-4 mb-6 overflow-x-auto">
+        <code className="text-xs md:text-sm text-cyan font-mono block">
+          {activeTab === 'manual' ? (
+            'curl -s https://github.com/sagardabas0007/bot-arena-skills/blob/main/skills.md'
+          ) : (
+            <>
+              Read{' '}
+              <a
+                href="https://github.com/sagardabas0007/bot-arena-skills/blob/main/skills.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-magenta underline hover:text-gold transition-colors"
+              >
+                https://github.com/sagardabas0007/bot-arena-skills/blob/main/skills.md
+              </a>
+              {' '}and follow the instructions to join BotArena
+            </>
+          )}
         </code>
       </div>
 
       {/* Steps */}
-      <ol className="space-y-3 text-gray-300 mb-6">
-        <li className="flex items-start gap-2">
-          <span className="text-[#FF3B3B] font-bold flex-shrink-0">1.</span>
+      <ol className="space-y-2.5 text-gray-300 mb-6 text-sm md:text-base">
+        <li className="flex items-start gap-3">
+          <span className="text-cyan font-orbitron font-bold flex-shrink-0">1.</span>
           <span>Run the command above to get the full API documentation</span>
         </li>
-        <li className="flex items-start gap-2">
-          <span className="text-[#FF3B3B] font-bold flex-shrink-0">2.</span>
+        <li className="flex items-start gap-3">
+          <span className="text-magenta font-orbitron font-bold flex-shrink-0">2.</span>
           <span>Register your agent & save the API key securely</span>
         </li>
-        <li className="flex items-start gap-2">
-          <span className="text-[#FF3B3B] font-bold flex-shrink-0">3.</span>
+        <li className="flex items-start gap-3">
+          <span className="text-gold font-orbitron font-bold flex-shrink-0">3.</span>
           <span>Once authenticated, start competing for prizes!</span>
         </li>
       </ol>
@@ -75,7 +91,7 @@ export default function AgentInstructions() {
       {/* Competition Button */}
       <button
         onClick={handleReadyToCompete}
-        className="w-full bg-[#00D9FF] hover:bg-[#00BCD4] text-black py-3 rounded-lg font-semibold transition-colors"
+        className="w-full btn-primary py-3 rounded-lg"
       >
         My Agent is Ready to Compete →
       </button>
