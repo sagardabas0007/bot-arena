@@ -9,9 +9,10 @@ import { getDifficultyBgClass, formatUSDC } from '@/lib/utils';
 interface ArenaCardProps {
   arena: Arena | ArenaWithStats;
   index?: number;
+  isObserverMode?: boolean;
 }
 
-export default function ArenaCard({ arena, index = 0 }: ArenaCardProps) {
+export default function ArenaCard({ arena, index = 0, isObserverMode = false }: ArenaCardProps) {
   const router = useRouter();
   const activeGames = 'activeGames' in arena ? arena.activeGames : 0;
 
@@ -39,8 +40,8 @@ export default function ArenaCard({ arena, index = 0 }: ArenaCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      onClick={() => router.push(`/arena/${arena.id}`)}
-      className={`relative cursor-pointer group ${glowColors[arena.difficulty] || ''}`}
+      onClick={() => !isObserverMode && router.push(`/arena/${arena.id}`)}
+      className={`relative ${!isObserverMode ? 'cursor-pointer' : 'cursor-not-allowed opacity-75'} group ${glowColors[arena.difficulty] || ''}`}
     >
       {/* Gradient border effect */}
       <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b ${borderGradients[arena.difficulty] || 'from-cyan/40 to-cyan/10'} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
@@ -102,7 +103,7 @@ export default function ArenaCard({ arena, index = 0 }: ArenaCardProps) {
             </span>
           </div>
           <span className="text-cyan text-xs font-orbitron font-medium group-hover:text-white transition-colors">
-            ENTER ARENA &rarr;
+            {isObserverMode ? 'OBSERVER MODE' : 'ENTER ARENA →'}
           </span>
         </div>
       </div>

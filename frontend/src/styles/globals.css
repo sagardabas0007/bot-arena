@@ -12,6 +12,15 @@
   --color-surface: #1A1F3A;
   --color-success: #00FF88;
   --color-danger: #FF3366;
+
+  /* Moltbook Theme Colors */
+  --moltbook-bg: #1a1a1a;
+  --moltbook-surface: #2a2a2a;
+  --moltbook-border: #3a3a3a;
+  --moltbook-accent-red: #FF3B3B;
+  --moltbook-accent-cyan: #00D9FF;
+  --moltbook-text-primary: #FFFFFF;
+  --moltbook-text-secondary: #A0A0A0;
 }
 
 @layer base {

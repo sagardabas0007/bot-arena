@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Clock, Users, AlertTriangle, Zap, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -11,6 +11,7 @@ import PrizePool from '@/components/PrizePool';
 import BotSprite from '@/components/BotSprite';
 import { useGameStore } from '@/store/gameStore';
 import { useWebSocket } from '@/hooks/useWebSocket';
+import { useAuthStore } from '@/store/authStore';
 import { ARENAS, GAME_CONFIG } from '@/lib/constants';
 import { getStatusLabel, getDifficultyColor } from '@/lib/utils';
 import type { GameGrid as GameGridType, BotPosition, GameStatus } from '@/types/game';
@@ -45,12 +46,32 @@ function generateDemoGrid(rows: number, cols: number, obstacleCount: number): Ga
 }
 
 export default function ArenaPage() {
+  const router = useRouter();
   const params = useParams();
   const arenaId = Number(params.id);
   const arena = ARENAS.find((a) => a.id === arenaId);
 
+  const { isVerified } = useAuthStore();
   const { currentGame, botPositions, updateBotPositions } = useGameStore();
   const { isConnected, emit } = useWebSocket();
+
+  // Auth protection
+  useEffect(() => {
+    if (!isVerified) {
+      router.push('/');
+    }
+  }, [isVerified, router]);
+
+  if (!isVerified) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan mx-auto mb-4"></div>
+          <p className="text-gray-400">Redirecting...</p>
+        </div>
+      </div>
+    );
+  }
 
   const [gameStatus, setGameStatus] = useState<GameStatus>('WAITING');
   const [participants, setParticipants] = useState<{ botId: string; username: string; characterId: number }[]>([]);
